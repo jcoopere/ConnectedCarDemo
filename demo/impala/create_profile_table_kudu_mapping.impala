@@ -1,0 +1,26 @@
+CREATE EXTERNAL TABLE connected_car_profiles (
+  vin STRING,
+  acceleration_aggression_score DOUBLE,
+  braking_aggression_score DOUBLE,
+  handling_aggression_score DOUBLE,
+  overall_aggression_score DOUBLE,
+  oil_replacement_period INT,
+  brake_replacement_period INT,
+  tire_replacement_period INT,
+  miles_count BIGINT,
+  brakes_applied_count BIGINT,
+  average_speed INT,
+  illegal_lane_departure_plus_minus INT,
+  collisions_count INT,
+  hazards_detected_count INT,
+  readings_count BIGINT,
+  accelerating_readings_count BIGINT,
+  decelerating_readings_count BIGINT
+)
+DISTRIBUTE BY HASH (vin) INTO 3 BUCKETS
+TBLPROPERTIES(
+  'storage_handler' = 'com.cloudera.kudu.hive.KuduStorageHandler',
+  'kudu.table_name' = 'connected_car_profiles',
+  'kudu.master_addresses' = <ReplaceMeWithKuduMasterHost>:7051',
+  'kudu.key_columns' = 'vin'
+);

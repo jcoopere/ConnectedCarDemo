@@ -1,0 +1,1 @@
+UPDATE connected_car_profiles SET acceleration_aggression_score=100.0 where vin = '1010';

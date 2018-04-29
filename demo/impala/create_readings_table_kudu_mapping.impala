@@ -1,0 +1,22 @@
+CREATE EXTERNAL TABLE connected_car_readings (
+  vin STRING,
+  time BIGINT,
+  x_accel DOUBLE,
+  y_accel DOUBLE,
+  z_accel DOUBLE,
+  speed TINY_INT,
+  brakes_on BOOLEAN,
+  signal_on BOOLEAN,
+  lane_departed BOOLEAN,
+  collision_detected BOOLEAN,
+  hazard_detected BOOLEAN,
+  latitude DOUBLE,
+  longitude DOUBLE
+)
+DISTRIBUTE BY HASH (vin) INTO 3 BUCKETS
+TBLPROPERTIES(
+  'storage_handler' = 'com.cloudera.kudu.hive.KuduStorageHandler',
+  'kudu.table_name' = 'connected_car_reading',
+  'kudu.master_addresses' = <ReplaceMeWithKuduMasterHost>:7051',
+  'kudu.key_columns' = 'vin, time'
+);
