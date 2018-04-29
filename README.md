@@ -1,4 +1,6 @@
 # ConnectedCarDemo
+Recording: [Connected Car Recording - Jonathan Cooper-Ellis](https://www.youtube.com/watch?v=v0p55fbaDyE)
+
 Components Involved:
   - Arcadia Data
   - StreamSets
